@@ -13,41 +13,39 @@ with open("input.txt", 'r') as infile:
 
         line = infile.readline()
 
-# Find all nodes that end in 'A'
+# Find all nodes that end in 'A' as starting nodes
 nodes = []
 for k in network.keys():
     if k[-1] == 'A':
         nodes.append(k)
 
+# Find the cycle properties of each starting node
+cycles = []
+for node in nodes:
+    i = 0
+    loc = (node, i % len(insts))
+    seen = {}
+    goals = []
+    while loc not in seen:
+        # Add node to `seen` and store location in sequence
+        seen[loc] = i  # store (node, i % len(insts)) : i
+        if node[-1] == 'Z':
+            goals.append(loc)  # if we found an endpoint 'xxZ', save its location
 
-# Find cycles(?)
-i = 0
-node = nodes[0]
-seen = {}
-goals = []
-loc = (node, i % len(insts))
-while loc not in seen:
-    print(node)
-    seen[loc] = i  # store (node, i % len(insts)) : i
-    if node[-1] == 'Z':
-        goals.append(loc)
-    node = network[node][insts[loc[1]]]
+        # Follow instruction i % len(insts) to next node
+        node = network[node][insts[loc[1]]]
+        i += 1
+        loc = (node, i % len(insts))  # must encounter again same node at same position in instructions
     
-    i += 1
-    loc = (node, i % len(insts))  # must encounter again same node at same position in instructions
-print(node)
-print(seen)
-print(i, loc, i - seen[loc])
-print(goals, seen[goals[0]])
+    cycles.append((seen[goals[0]], (i - loc[1])))
 
+print(cycles)
 
-# # Follow all nodes in network until all end in 'Z' (NOTE: not fast enough)
-# i = 0
-# while not all(node[-1] == 'Z' for node in nodes):
-#     # print(nodes)
-#     for j in range(len(nodes)):
-#         nodes[j] = network[nodes[j]][insts[i % len(insts)]]
-#     i += 1
-
-# print(nodes)
-# print(i)
+# Find index which makes every cycle end on a node matching 'xxZ'
+k = 0
+node = nodes[k]
+to_print = {cycles[k][0] + cycles[k][1] * j for j in range(10)}
+for j in range(200_000):
+    if j in to_print:
+        print(node)
+    node = network[node][insts[j % len(insts)]]
