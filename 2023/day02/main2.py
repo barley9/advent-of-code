@@ -1,4 +1,5 @@
 import collections
+import math
 
 with open("input.txt", 'r') as infile:
     games = [
@@ -14,27 +15,17 @@ for game in games:
     print("\t", game)
 print("]")
 
-bag = collections.Counter({
-    'red': 12,
-    'green': 13,
-    'blue': 14,
-})
-print(bag)
 total = 0
 for i, game in enumerate(games):
-    alltrue = True
+    min_cubes = collections.Counter({
+        'red': 0,
+        'green': 0,
+        'blue': 0
+    })
     for reveal in game:
         reveal = collections.Counter(reveal)
-        print("\t", reveal)
         for color in ['red', 'green', 'blue']:
-            try:
-                alltrue *= (bag[color] >= reveal[color])
-            except KeyError:
-                pass
-    if alltrue:
-        total += i + 1
-        print("\t\tpossible")
-    else:
-        print("\t\timpossible")
+            min_cubes[color] = max(reveal[color], min_cubes[color])
+    total += math.prod(min_cubes.values())
 
 print(total)
