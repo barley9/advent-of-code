@@ -1,0 +1,13 @@
+
+                1    23     2    3  45   43     45   4                     3       4                  
+v<<A ^>>A vA ^A v<<A ^>>A A  v<A <A ^>>A   A <A v>A   A ^A v<A ^>A A <A >A  v<A <A ^>>A A A <A v>A ^A  # Mine
+   <    A  >  A    <    A A    v  <    A   A  ^   >   >  A   v   A A  ^  A    v  <    A A A  ^   >  A
+        ^     A         ^ ^            <   <             A       > >     A            v v v         A
+
+<v<A >>^A vA ^A  <vA   <A A >>^A  A   vA <^A >A   A  vA ^A <vA >^A A <A >A <v<A >A  >^A A A vA <^A >A  # AoC
+   <    A  >  A    v    < <    A  A    >   ^  A   A   >  A   v   A A  ^  A    <  v    A A A  >   ^  A
+        ^     A                <  <           ^   ^      A       > >     A            v v v         A
+
+<<vA >>^A vA ^A <<vA >>^A A <<vA >A  >^A   A vA   A <^A >A <vA >^A A <A >A <<vA >A  >^A A A vA <^A >A  # Mine
+   <    A  >  A    <    A A    <  v    A   A  >   >   ^  A   v   A A  ^  A    <  v    A A A  >   ^  A
+        ^     A         ^ ^            <   <             A       > >     A            v v v         A
